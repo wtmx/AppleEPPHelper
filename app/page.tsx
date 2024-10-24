@@ -1,101 +1,109 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { Search, User, ShoppingBag, Home } from 'lucide-react'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-white text-gray-900">
+      <header className="sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-50">
+        <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <Link href="/" className="text-2xl font-semibold">
+            Apple EPP Helper
+          </Link>
+          <div className="space-x-6">
+            <Link href="/products" className="hover:text-gray-600">Products</Link>
+            <Link href="/jobs" className="hover:text-gray-600">Jobs</Link>
+          </div>
+          <div className="flex items-center space-x-4">
+            <Link href="/">
+              <Home className="w-5 h-5 text-gray-600 cursor-pointer hover:text-blue-600" />
+            </Link>
+            <Search className="w-5 h-5 text-gray-600 cursor-pointer" />
+            <User className="w-5 h-5 text-gray-600 cursor-pointer" />
+            <ShoppingBag className="w-5 h-5 text-gray-600 cursor-pointer" />
+          </div>
+        </nav>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+      <main>
+        <section className="relative h-[80vh] bg-gray-100">
+          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=1080&width=1920')] bg-cover bg-center" />
+          <div className="absolute inset-0 bg-black bg-opacity-30" />
+          <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">Sign Up for Exclusive Apple Product Offers</h1>
+            <p className="text-xl md:text-2xl mb-8">Be the first to know about the latest Apple products and receive exclusive offers.</p>
+            <Link
+              href="/signup"
+              className="bg-white text-gray-900 px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300"
+            >
+              Get Started
+            </Link>
+          </div>
+        </section>
+
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <img src="/placeholder.svg?height=64&width=64" alt="Access Icon" className="mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Access Exclusive Apple Products</h3>
+              <p className="text-gray-600">Get early and exclusive access to Apple products before they are made public.</p>
+            </div>
+            <div className="text-center">
+              <img src="/placeholder.svg?height=64&width=64" alt="Job Alert Icon" className="mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Personalized Job Alerts</h3>
+              <p className="text-gray-600">Receive tailored job alerts for Apple roles that fit your skills.</p>
+            </div>
+            <div className="text-center">
+              <img src="/placeholder.svg?height=64&width=64" alt="Subscription Icon" className="mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Easy and Quick Subscription</h3>
+              <p className="text-gray-600">Subscribe easily for offers and job alerts, all in one place.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold mb-8">Exclusive Offers</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  product: 'iPhone',
+                  description: 'Sign up to get exclusive discounts and early access to the latest iPhone.'
+                },
+                {
+                  product: 'MacBook',
+                  description: 'Register to receive personalized discounts and be the first to know about new MacBooks.'
+                },
+                {
+                  product: 'iPad',
+                  description: 'Subscribe to our alerts for exclusive offers on the latest iPads.'
+                }
+              ].map(({ product, description }) => (
+                <div key={product} className="bg-gray-50 p-6 rounded-lg">
+                  <img src="/placeholder.svg?height=200&width=200" alt={product} className="mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">{product} Exclusive Offer</h3>
+                  <p className="text-gray-600 mb-4">{description}</p>
+                  <Link
+                    href={`/signup/${product.toLowerCase()}`}
+                    className="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition duration-300"
+                  >
+                    Sign Me Up
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="bg-gray-100 py-8">
+        <div className="container mx-auto px-4 text-center text-gray-600">
+          <p>&copy; 2023 Apple EPP Helper. All rights reserved.</p>
+          <div className="mt-4 space-x-4">
+            <Link href="/contact" className="text-blue-600 hover:underline">Contact Us</Link>
+            <Link href="/faq" className="text-blue-600 hover:underline">FAQ</Link>
+          </div>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
