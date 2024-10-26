@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ChevronDown, ArrowLeft, Search, User, ShoppingBag, Home } from 'lucide-react'
+import { ChevronDown, ArrowLeft, Search, User, ShoppingBag, Home, ExternalLink } from 'lucide-react'
 
 const iPhoneModels = [
   { name: 'iPhone 16 Pro', colors: ['Desert Titanium', 'Natural Titanium', 'Black Titanium', 'White Titanium'], storage: ['128GB', '256GB', '512GB', '1TB'] },
@@ -108,9 +108,19 @@ export default function ProductsPage() {
                   </label>
                 </div>
 
-                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300">
+                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mb-2">
                   Add to Cart
                 </button>
+
+                <a 
+                  href="https://www.apple.com/sg/shop/buy-iphone"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center text-blue-600 hover:text-blue-800 transition duration-300"
+                >
+                  <ExternalLink className="w-4 h-4 mr-1" />
+                  View on Apple Store
+                </a>
               </div>
             ))}
           </div>
@@ -146,9 +156,19 @@ export default function ProductsPage() {
                   ))}
                 </div>
 
-                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mt-auto">
+                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mt-auto mb-2">
                   Add to Cart
                 </button>
+
+                <a 
+                  href="https://www.apple.com/sg/airpods/compare/"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center text-blue-600 hover:text-blue-800 transition duration-300"
+                >
+                  <ExternalLink className="w-4 h-4 mr-1" />
+                  Compare on Apple Store
+                </a>
               </div>
             ))}
           </div>
