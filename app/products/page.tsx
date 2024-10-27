@@ -2,14 +2,15 @@ import Link from 'next/link'
 import { ChevronDown, ArrowLeft, Search, User, ShoppingBag, Home, ExternalLink } from 'lucide-react'
 
 const iPhoneModels = [
-  { name: 'iPhone 16 Pro', colors: ['Desert Titanium', 'Natural Titanium', 'Black Titanium', 'White Titanium'], storage: ['128GB', '256GB', '512GB', '1TB'] },
-  { name: 'iPhone 16 Pro Max', colors: ['Desert Titanium', 'Natural Titanium', 'Black Titanium', 'White Titanium'], storage: ['128GB', '256GB', '512GB', '1TB'] },
-  { name: 'iPhone 16', colors: ['Ultramarine', 'Teal', 'Pink', 'White', 'Black'], storage: ['64GB', '128GB', '256GB'] },
-  { name: 'iPhone 16 Plus', colors: ['Ultramarine', 'Teal', 'Pink', 'White', 'Black'], storage: ['128GB', '256GB', '512GB'] },
+  { name: 'iPhone 16 Pro', colors: ['Black Titanium', 'Natural Titanium', 'White Titanium', 'Desert Titanium'], storage: ['128GB', '256GB', '512GB', '1TB'] },
+  { name: 'iPhone 16 Pro Max', colors: ['Black Titanium', 'Natural Titanium', 'White Titanium', 'Desert Titanium'], storage: ['256GB', '512GB', '1TB'] },
+  { name: 'iPhone 16', colors: ['Black', 'White', 'Pink', 'Teal', 'Ultramarine'], storage: ['128GB', '256GB', '512GB'] },
+  { name: 'iPhone 16 Plus', colors: ['Black', 'White', 'Pink', 'Teal', 'Ultramarine'], storage: ['128GB', '256GB', '512GB'] },
   { name: 'iPhone 15', colors: ['Blue', 'Pink', 'Yellow', 'Green', 'Black'], storage: ['128GB', '256GB', '512GB'] },
-  { name: 'iPhone 15 Plus', colors: ['Blue', 'Pink', 'Yellow', 'Green', 'Black'], storage: ['128GB', '256GB', '512GB'] },
-  { name: 'iPhone 14', colors: ['Blue', 'Purple', 'Yellow', 'Midnight', 'Starlight', 'Red'], storage: ['64GB', '128GB', '256GB'] },
-  { name: 'iPhone 14 Plus', colors: ['Blue', 'Purple', 'Yellow', 'Midnight', 'Starlight', 'Red'], storage: ['128GB', '256GB', '512GB'] },
+  { name: 'iPhone 15 Plus', colors: ['Black', 'Blue', 'Green', 'Yellow', 'Pink'], storage: ['128GB', '256GB', '512GB'] },
+  { name: 'iPhone 14', colors: ['Midnight', 'Starlight', 'Red', 'Blue', 'Purple', 'Yellow'], storage: ['128GB', '256GB', '512GB'] },
+  { name: 'iPhone 14 Plus', colors: ['Midnight', 'Starlight', 'Red', 'Blue', 'Purple', 'Yellow'], storage: ['128GB', '256GB', '512GB'] },
+  { name: 'iPhone SE', colors: ['Red', 'Starlight', 'Midnight'], storage: ['64GB', '128GB', '256GB'] },
 ]
 
 const airPodsModels = [
@@ -38,6 +39,24 @@ const airPodsModels = [
     ]
   }
 ]
+
+const iPhoneImages: { [key: string]: string } = {
+  'iPhone 16 Pro': '/images/iphone-16-pro.jpg',
+  'iPhone 16 Pro Max': '/images/iphone-16-pro-max.jpg',
+  'iPhone 16': '/images/iphone-16.jpg',
+  'iPhone 16 Plus': '/images/iphone-16-plus.jpg',
+  'iPhone 15': '/images/iphone-15.png',
+  'iPhone 15 Plus': '/images/iphone-15-plus.png',
+  'iPhone 14': '/images/iphone-14.png',
+  'iPhone 14 Plus': '/images/iphone-14-plus.png',
+  'iPhone SE': '/images/iphone-se.png',
+};
+
+const airPodsImages: { [key: string]: string } = {
+  'AirPods 4': '/images/airpods-4.jpg',
+  'AirPods Pro 2': '/images/airpods-pro-2.jpg',
+  'AirPods Max': '/images/airpods-max.jpg',
+};
 
 export default function ProductsPage() {
   return (
@@ -81,7 +100,13 @@ export default function ProductsPage() {
             {iPhoneModels.map((model) => (
               <div key={model.name} className="border rounded-lg p-4 shadow-sm">
                 <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
-                <img src={`/placeholder.svg?height=200&width=200&text=${encodeURIComponent(model.name)}`} alt={model.name} className="w-full h-48 object-cover mb-4" />
+                <div className="h-64 mb-4">
+                  <img 
+                    src={iPhoneImages[model.name] || '/placeholder.svg'} 
+                    alt={model.name} 
+                    className="w-full h-full object-contain" 
+                  />
+                </div>
                 
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">Color</label>
@@ -128,11 +153,17 @@ export default function ProductsPage() {
 
         <section id="airpods" className="mt-12">
           <h2 className="text-2xl font-bold mb-4">AirPods</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {airPodsModels.map((model) => (
-              <div key={model.name} className="border rounded-lg p-4 shadow-sm flex flex-col">
+              <div key={model.name} className="border rounded-lg p-4 shadow-sm flex flex-col h-full">
                 <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
-                <img src={`/placeholder.svg?height=200&width=200&text=${encodeURIComponent(model.name)}`} alt={model.name} className="w-full h-48 object-cover mb-4" />
+                <div className="h-64 mb-4">
+                  <img 
+                    src={airPodsImages[model.name] || '/placeholder.svg'} 
+                    alt={model.name} 
+                    className="w-full h-full object-contain" 
+                  />
+                </div>
                 
                 <div className="flex-grow">
                   {model.options.map((option) => (
@@ -156,19 +187,21 @@ export default function ProductsPage() {
                   ))}
                 </div>
 
-                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mt-auto mb-2">
-                  Add to Cart
-                </button>
+                <div className="mt-auto">
+                  <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mb-2">
+                    Add to Cart
+                  </button>
 
-                <a 
-                  href="https://www.apple.com/sg/airpods/compare/"
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center text-blue-600 hover:text-blue-800 transition duration-300"
-                >
-                  <ExternalLink className="w-4 h-4 mr-1" />
-                  Compare on Apple Store
-                </a>
+                  <a 
+                    href="https://www.apple.com/sg/airpods/compare/"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center text-blue-600 hover:text-blue-800 transition duration-300"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-1" />
+                    Compare on Apple Store
+                  </a>
+                </div>
               </div>
             ))}
           </div>

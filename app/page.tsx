@@ -43,17 +43,17 @@ export default function HomePage() {
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <img src="/placeholder.svg?height=64&width=64" alt="Access Icon" className="mx-auto mb-4" />
+              <img src="images/exclusive-apple-pdt.jpeg?height=64&width=64" alt="Access Icon" className="mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Access Exclusive Apple Products</h3>
               <p className="text-gray-600">Get early and exclusive access to Apple products before they are made public.</p>
             </div>
             <div className="text-center">
-              <img src="/placeholder.svg?height=64&width=64" alt="Job Alert Icon" className="mx-auto mb-4" />
+              <img src="/images/job-alerts.jpeg?height=64&width=64" alt="Job Alert Icon" className="mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Personalized Job Alerts</h3>
               <p className="text-gray-600">Receive tailored job alerts for Apple roles that fit your skills.</p>
             </div>
             <div className="text-center">
-              <img src="/placeholder.svg?height=64&width=64" alt="Subscription Icon" className="mx-auto mb-4" />
+              <img src="/images/subscribe-alerts.webp?height=64&width=64" alt="Subscription Icon" className="mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Easy and Quick Subscription</h3>
               <p className="text-gray-600">Subscribe easily for offers and job alerts, all in one place.</p>
             </div>
