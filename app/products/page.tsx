@@ -3,9 +3,51 @@
 import { useState } from 'react'
 import OrderModal from '../components/OrderModal'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ChevronDown, ArrowLeft, Search, User, ShoppingBag, Home, ExternalLink } from 'lucide-react'
 
-const iPhoneModels = [
+// Define types for our models
+interface ProductOption {
+  label: string
+  type: 'checkbox' | 'select'
+  choices?: string[]
+}
+
+interface IPhoneModel extends ProductModel {
+  colors: string[]
+  storage: string[]
+}
+
+interface AirPodsModel extends ProductModel {
+  options: ProductOption[]
+}
+
+interface IPadModel extends ProductModel {
+  options: ProductOption[]
+}
+
+interface ProductModel {
+  name: string
+  colors?: string[]
+  storage?: string[]
+  options?: ProductOption[]
+}
+
+interface ProductDetails {
+  name: string
+  color?: string
+  storage?: string
+  size?: string
+  display_glass?: string
+  connectivity?: string
+  apple_pencil?: string
+  keyboard?: string
+  smart_folio?: string
+  unique_features?: string
+  applecare_opt_in?: boolean
+}
+
+const iPhoneModels: IPhoneModel[] = [
   { name: 'iPhone 16 Pro', colors: ['Black Titanium', 'Natural Titanium', 'White Titanium', 'Desert Titanium'], storage: ['128GB', '256GB', '512GB', '1TB'] },
   { name: 'iPhone 16 Pro Max', colors: ['Black Titanium', 'Natural Titanium', 'White Titanium', 'Desert Titanium'], storage: ['256GB', '512GB', '1TB'] },
   { name: 'iPhone 16', colors: ['Black', 'White', 'Pink', 'Teal', 'Ultramarine'], storage: ['128GB', '256GB', '512GB'] },
@@ -17,7 +59,7 @@ const iPhoneModels = [
   { name: 'iPhone SE', colors: ['Red', 'Starlight', 'Midnight'], storage: ['64GB', '128GB', '256GB'] },
 ]
 
-const airPodsModels = [
+const airPodsModels: AirPodsModel[] = [
   { 
     name: 'AirPods 4', 
     options: [
@@ -44,7 +86,7 @@ const airPodsModels = [
   }
 ]
 
-const iPadModels = [
+const iPadModels: IPadModel[] = [
   {
     name: 'iPad Pro',
     options: [
@@ -225,10 +267,10 @@ const iPadImages: { [key: string]: string } = {
 
 export default function ProductsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedProduct, setSelectedProduct] = useState<any>(null)
+  const [selectedProduct, setSelectedProduct] = useState<ProductDetails | null>(null)
   const [selectedColors, setSelectedColors] = useState<{[key: string]: string}>({})
   const [selectedStorage, setSelectedStorage] = useState<{[key: string]: string}>({})
-  const [selectedOptions, setSelectedOptions] = useState<{[key: string]: any}>({})
+  const [selectedOptions, setSelectedOptions] = useState<{[key: string]: {[key: string]: string | boolean}}>({})
 
   const handleColorChange = (modelName: string, color: string) => {
     setSelectedColors(prev => ({
@@ -244,27 +286,27 @@ export default function ProductsPage() {
     }))
   }
 
-  const handleAddToCart = (model: any, type: 'iPhone' | 'AirPods' | 'iPad') => {
-    let productDetails: any = {
+  const handleAddToCart = (model: ProductModel, type: 'iPhone' | 'AirPods' | 'iPad') => {
+    const productDetails: ProductDetails = {
       name: model.name,
     }
 
-    if (type === 'iPhone') {
+    if (type === 'iPhone' && model.colors && model.storage) {
       productDetails.color = selectedColors[model.name] || model.colors[0]
       productDetails.storage = selectedStorage[model.name] || model.storage[0]
-      // Get AppleCare+ selection for iPhone
-      productDetails.applecare_opt_in = selectedOptions[model.name]?.['AppleCare+'] || false
-    } else if (type === 'AirPods') {
+      productDetails.applecare_opt_in = selectedOptions[model.name]?.['AppleCare+'] as boolean || false
+    } else if (type === 'AirPods' && model.options) {
       if (model.name === 'AirPods Max') {
-        const colorOption = model.options.find((opt: any) => opt.label === 'Color')
-        productDetails.color = selectedOptions[model.name]?.['Color'] || colorOption?.choices[0]
+        const colorOption = model.options.find(opt => opt.label === 'Color')
+        if (colorOption && colorOption.choices) {
+          productDetails.color = (selectedOptions[model.name]?.['Color'] as string) || colorOption.choices[0]
+        }
       }
       
-      // Collect unique features for AirPods
       const features: string[] = []
-      model.options.forEach((option: any) => {
+      model.options.forEach(option => {
         if (option.type === 'checkbox' && selectedOptions[model.name]?.[option.label]) {
-          if (option.label !== 'AppleCare+') { // Don't include AppleCare+ in unique features
+          if (option.label !== 'AppleCare+') {
             features.push(option.label)
           }
         }
@@ -273,52 +315,54 @@ export default function ProductsPage() {
         productDetails.unique_features = features.join(', ')
       }
       
-      // Get AppleCare+ selection for AirPods
-      productDetails.applecare_opt_in = selectedOptions[model.name]?.['AppleCare+'] || false
-    } else if (type === 'iPad') {
-      // Handle color/finish selection
-      const colorOption = model.options.find((opt: any) => 
+      productDetails.applecare_opt_in = selectedOptions[model.name]?.['AppleCare+'] as boolean || false
+    } else if (type === 'iPad' && model.options) {
+      const colorOption = model.options.find(opt => 
         opt.label === 'Color' || opt.label === 'Finish'
       )
-      productDetails.color = selectedOptions[model.name]?.[colorOption?.label] || colorOption?.choices[0]
+      if (colorOption && colorOption.choices) {
+        productDetails.color = (selectedOptions[model.name]?.[colorOption.label] as string) || colorOption.choices[0]
+      }
 
-      // Handle storage selection
-      const storageOption = model.options.find((opt: any) => opt.label === 'Storage')
-      productDetails.storage = selectedOptions[model.name]?.['Storage'] || storageOption?.choices[0]
+      const storageOption = model.options.find(opt => opt.label === 'Storage')
+      if (storageOption && storageOption.choices) {
+        productDetails.storage = (selectedOptions[model.name]?.['Storage'] as string) || storageOption.choices[0]
+      }
 
-      // Handle iPad-specific features
-      model.options.forEach((option: any) => {
-        switch(option.label) {
-          case 'Size':
-            productDetails.size = selectedOptions[model.name]?.['Size'] || option.choices[0]
-            break
-          case 'Display glass':
-            productDetails.display_glass = selectedOptions[model.name]?.['Display glass'] || option.choices[0]
-            break
-          case 'Connectivity':
-            productDetails.connectivity = selectedOptions[model.name]?.['Connectivity'] || option.choices[0]
-            break
-          case 'Apple Pencil':
-            const pencilChoice = selectedOptions[model.name]?.['Apple Pencil'] || option.choices[0]
-            if (pencilChoice !== 'No Apple Pencil') {
-              productDetails.apple_pencil = pencilChoice
-            }
-            break
-          case 'Keyboard':
-            const keyboardChoice = selectedOptions[model.name]?.['Keyboard'] || option.choices[0]
-            if (keyboardChoice !== 'No keyboard') {
-              productDetails.keyboard = keyboardChoice
-            }
-            break
-          case 'Smart Folio':
-            const folioChoice = selectedOptions[model.name]?.['Smart Folio'] || option.choices[0]
-            if (folioChoice !== 'No Smart Folio') {
-              productDetails.smart_folio = folioChoice
-            }
-            break
-          case 'AppleCare+':
-            productDetails.applecare_opt_in = selectedOptions[model.name]?.['AppleCare+'] || false
-            break
+      model.options.forEach(option => {
+        if (option.choices) {
+          switch(option.label) {
+            case 'Size':
+              productDetails.size = (selectedOptions[model.name]?.['Size'] as string) || option.choices[0]
+              break
+            case 'Display glass':
+              productDetails.display_glass = (selectedOptions[model.name]?.['Display glass'] as string) || option.choices[0]
+              break
+            case 'Connectivity':
+              productDetails.connectivity = (selectedOptions[model.name]?.['Connectivity'] as string) || option.choices[0]
+              break
+            case 'Apple Pencil':
+              const pencilChoice = (selectedOptions[model.name]?.['Apple Pencil'] as string) || option.choices[0]
+              if (pencilChoice !== 'No Apple Pencil') {
+                productDetails.apple_pencil = pencilChoice
+              }
+              break
+            case 'Keyboard':
+              const keyboardChoice = (selectedOptions[model.name]?.['Keyboard'] as string) || option.choices[0]
+              if (keyboardChoice !== 'No keyboard') {
+                productDetails.keyboard = keyboardChoice
+              }
+              break
+            case 'Smart Folio':
+              const folioChoice = (selectedOptions[model.name]?.['Smart Folio'] as string) || option.choices[0]
+              if (folioChoice !== 'No Smart Folio') {
+                productDetails.smart_folio = folioChoice
+              }
+              break
+          }
+        }
+        if (option.label === 'AppleCare+') {
+          productDetails.applecare_opt_in = selectedOptions[model.name]?.['AppleCare+'] as boolean || false
         }
       })
     }
@@ -378,11 +422,14 @@ export default function ProductsPage() {
             {iPhoneModels.map((model) => (
               <div key={model.name} className="border rounded-lg p-4 shadow-sm">
                 <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
-                <div className="h-64 mb-4">
-                  <img 
+                <div className="relative h-64 mb-4">
+                  <Image 
                     src={iPhoneImages[model.name] || '/placeholder.svg'} 
-                    alt={model.name} 
-                    className="w-full h-full object-contain" 
+                    alt={model.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    className="object-contain"
+                    priority
                   />
                 </div>
                 
@@ -439,11 +486,14 @@ export default function ProductsPage() {
             {airPodsModels.map((model) => (
               <div key={model.name} className="border rounded-lg p-4 shadow-sm flex flex-col h-full">
                 <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
-                <div className="h-64 mb-4">
-                  <img 
+                <div className="relative h-64 mb-4">
+                  <Image 
                     src={airPodsImages[model.name] || '/placeholder.svg'} 
-                    alt={model.name} 
-                    className="w-full h-full object-contain" 
+                    alt={model.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    className="object-contain"
+                    priority
                   />
                 </div>
                 
@@ -506,11 +556,14 @@ export default function ProductsPage() {
             {iPadModels.map((model) => (
               <div key={model.name} className="border rounded-lg p-4 shadow-sm flex flex-col h-full">
                 <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
-                <div className="h-64 mb-4">
-                  <img 
+                <div className="relative h-64 mb-4">
+                  <Image 
                     src={iPadImages[model.name] || '/placeholder.svg'} 
-                    alt={model.name} 
-                    className="w-full h-full object-contain" 
+                    alt={model.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    className="object-contain"
+                    priority
                   />
                 </div>
                 

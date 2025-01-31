@@ -66,7 +66,7 @@ export default function OrderModal({ isOpen, onClose, productDetails }: OrderMod
       console.log('Submitting product details:', productDetails) // Log product details
 
       // First, get or create user
-      let { data: user, error: userError } = await supabase
+      const { data: user, error: userError } = await supabase
         .from('users')
         .upsert({ 
           email,
