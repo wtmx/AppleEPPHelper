@@ -4,7 +4,7 @@ import { useState } from 'react'
 import OrderModal from '../components/OrderModal'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronDown, ArrowLeft, Search, User, ShoppingBag, Home, ExternalLink } from 'lucide-react'
+import { Search, User, ShoppingBag, Home, ExternalLink } from 'lucide-react'
 
 // Define types for our models
 interface ProductOption {
