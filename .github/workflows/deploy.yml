@@ -33,14 +33,10 @@ jobs:
           node-version: '20'
           
       - name: Install Dependencies
-        run: |
-          cd store
-          npm install
+        run: npm install
           
       - name: Build
-        run: |
-          cd store
-          npm run build
+        run: npm run build
           
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
@@ -48,4 +44,4 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./store 
+          working-directory: ./ 
