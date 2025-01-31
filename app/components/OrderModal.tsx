@@ -176,7 +176,7 @@ export default function OrderModal({ isOpen, onClose, productDetails }: OrderMod
           <div className="text-center py-8">
             <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
             <p className="text-lg font-semibold text-gray-800">Thank you for your interest!</p>
-            <p className="text-gray-600 mt-2">We'll notify you when this product is ready for order.</p>
+            <p className="text-gray-600 mt-2">We&apos;ll notify you when this product is ready for order.</p>
             <button
               onClick={handleClose}
               className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"

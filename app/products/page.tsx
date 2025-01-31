@@ -371,7 +371,7 @@ export default function ProductsPage() {
     setIsModalOpen(true)
   }
 
-  const handleOptionChange = (modelName: string, optionLabel: string, value: any) => {
+  const handleOptionChange = (modelName: string, optionLabel: string, value: string | boolean) => {
     setSelectedOptions(prev => ({
       ...prev,
       [modelName]: {
