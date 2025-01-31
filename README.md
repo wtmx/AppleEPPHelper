@@ -4,7 +4,7 @@ A personal project designed to streamline the process of helping friends and fam
 
 ## Overview
 
-Apple EPP Helper is a web application that allows my personal connections to browse Apple products and indicate their interest in purchasing items through available EPP discounts. This platform serves as an organized way to manage requests from friends and family who are interested in Apple products with potential EPP pricing.
+Apple EPP Helper is a web app that allows my personal connections to browse Apple products and indicate their interest in purchasing items through available EPP discounts. This platform serves as an organized way to manage requests from friends and family who are interested in Apple products with potential EPP pricing.
 
 ## Purpose
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Mail, X, CheckCircle, Phone, User } from 'lucide-react'
+import { CheckCircle, X, Mail, Phone, User } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 
 interface OrderModalProps {

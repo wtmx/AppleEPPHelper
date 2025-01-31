@@ -43,8 +43,8 @@ export default function HomePage() {
 
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="relative h-16 w-16 mx-auto mb-4">
+            <div className="text-center flex flex-col h-full">
+              <div className="relative h-48 w-48 mx-auto mb-6">
                 <Image
                   src="/images/exclusive-apple-pdt.jpeg"
                   alt="Access Icon"
@@ -52,11 +52,17 @@ export default function HomePage() {
                   className="object-contain"
                 />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Access Exclusive Apple Products</h3>
-              <p className="text-gray-600">Get early and exclusive access to Apple products before they are made public.</p>
+              <div className="flex flex-col flex-grow">
+                <h3 className="text-3xl font-semibold mb-4 min-h-[80px] flex items-center justify-center">
+                  Access Exclusive Apple Products
+                </h3>
+                <p className="text-xl text-gray-600 min-h-[60px] flex items-center justify-center">
+                  Get early and exclusive access to Apple products before they are made public.
+                </p>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="relative h-16 w-16 mx-auto mb-4">
+            <div className="text-center flex flex-col h-full">
+              <div className="relative h-48 w-48 mx-auto mb-6">
                 <Image
                   src="/images/job-alerts.jpeg"
                   alt="Job Alert Icon"
@@ -64,11 +70,17 @@ export default function HomePage() {
                   className="object-contain"
                 />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Personalized Job Alerts</h3>
-              <p className="text-gray-600">Receive tailored job alerts for Apple roles that fit your skills.</p>
+              <div className="flex flex-col flex-grow">
+                <h3 className="text-3xl font-semibold mb-4 min-h-[80px] flex items-center justify-center">
+                  Personalized Job Alerts
+                </h3>
+                <p className="text-xl text-gray-600 min-h-[60px] flex items-center justify-center">
+                  Receive tailored job alerts for Apple roles that fit your skills.
+                </p>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="relative h-16 w-16 mx-auto mb-4">
+            <div className="text-center flex flex-col h-full">
+              <div className="relative h-48 w-48 mx-auto mb-6">
                 <Image
                   src="/images/subscribe-alerts.webp"
                   alt="Subscription Icon"
@@ -76,8 +88,14 @@ export default function HomePage() {
                   className="object-contain"
                 />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Easy and Quick Subscription</h3>
-              <p className="text-gray-600">Subscribe easily for offers and job alerts, all in one place.</p>
+              <div className="flex flex-col flex-grow">
+                <h3 className="text-3xl font-semibold mb-4 min-h-[80px] flex items-center justify-center">
+                  Easy and Quick Subscription
+                </h3>
+                <p className="text-xl text-gray-600 min-h-[60px] flex items-center justify-center">
+                  Subscribe easily for offers and job alerts, all in one place.
+                </p>
+              </div>
             </div>
           </div>
         </section>
