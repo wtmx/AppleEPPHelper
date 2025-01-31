@@ -1,8 +1,12 @@
+'use client'
+
+import type { NextPage } from 'next'
+import React from 'react'
 import Link from 'next/link'
-import { Search, User, ShoppingBag, Home, Mail } from 'lucide-react'
+import { Search, User, ShoppingBag, Home } from 'lucide-react'
 import Image from 'next/image'
 
-export default function HomePage() {
+const HomePage: NextPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       <header className="sticky top-0 bg-white shadow-sm bg-opacity-95 backdrop-blur-md z-50">
@@ -113,3 +117,5 @@ export default function HomePage() {
     </div>
   )
 }
+
+export default HomePage
