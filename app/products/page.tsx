@@ -382,47 +382,47 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <header className="sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-50">
+    <div className="min-h-screen bg-gray-50 text-gray-900">
+      <header className="sticky top-0 bg-white shadow-sm bg-opacity-95 backdrop-blur-md z-50">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-semibold">
+          <Link href="/" className="text-2xl font-bold text-gray-900">
             Apple EPP Helper
           </Link>
-          <div className="space-x-6">
-            <Link href="/products" className="hover:text-gray-600">Products</Link>
-            <Link href="/jobs" className="hover:text-gray-600">Jobs</Link>
+          <div className="space-x-8">
+            <Link href="/products" className="font-medium text-gray-700 hover:text-blue-600 transition duration-200">Products</Link>
+            <Link href="/jobs" className="font-medium text-gray-700 hover:text-blue-600 transition duration-200">Jobs</Link>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6">
             <Link href="/">
-              <Home className="w-5 h-5 text-gray-600 cursor-pointer hover:text-blue-600" />
+              <Home className="w-6 h-6 text-gray-700 hover:text-blue-600 transition duration-200" />
             </Link>
-            <Search className="w-5 h-5 text-gray-600 cursor-pointer" />
-            <User className="w-5 h-5 text-gray-600 cursor-pointer" />
-            <ShoppingBag className="w-5 h-5 text-gray-600 cursor-pointer" />
+            <Search className="w-6 h-6 text-gray-700 hover:text-blue-600 cursor-pointer transition duration-200" />
+            <User className="w-6 h-6 text-gray-700 hover:text-blue-600 cursor-pointer transition duration-200" />
+            <ShoppingBag className="w-6 h-6 text-gray-700 hover:text-blue-600 cursor-pointer transition duration-200" />
           </div>
         </nav>
       </header>
 
-      <nav className="bg-gray-200 py-2">
+      <nav className="bg-white shadow-sm py-4">
         <div className="container mx-auto px-4">
-          <ul className="flex space-x-4">
-            <li><Link href="#iphone" className="text-blue-600 hover:underline">iPhone</Link></li>
-            <li><Link href="#airpods" className="text-blue-600 hover:underline">AirPods</Link></li>
-            <li><Link href="#ipad" className="text-blue-600 hover:underline">iPad</Link></li>
-            <li><Link href="#mac" className="text-blue-600 hover:underline">Mac</Link></li>
-            <li><Link href="#watch" className="text-blue-600 hover:underline">Watch</Link></li>
+          <ul className="flex space-x-6">
+            <li><Link href="#iphone" className="text-blue-600 hover:text-blue-700 font-medium transition duration-200">iPhone</Link></li>
+            <li><Link href="#airpods" className="text-blue-600 hover:text-blue-700 font-medium transition duration-200">AirPods</Link></li>
+            <li><Link href="#ipad" className="text-blue-600 hover:text-blue-700 font-medium transition duration-200">iPad</Link></li>
+            <li><Link href="#mac" className="text-blue-600 hover:text-blue-700 font-medium transition duration-200">Mac</Link></li>
+            <li><Link href="#watch" className="text-blue-600 hover:text-blue-700 font-medium transition duration-200">Watch</Link></li>
           </ul>
         </div>
       </nav>
 
       <main className="container mx-auto px-4 py-8">
-        <section id="iphone">
-          <h2 className="text-2xl font-bold mb-4">iPhone</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section id="iphone" className="mb-16">
+          <h2 className="text-3xl font-bold mb-8 text-gray-900">iPhone</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {iPhoneModels.map((model) => (
-              <div key={model.name} className="border rounded-lg p-4 shadow-sm">
-                <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
-                <div className="relative h-64 mb-4">
+              <div key={model.name} className="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-6">
+                <h3 className="text-xl font-bold mb-4 text-gray-900">{model.name}</h3>
+                <div className="relative h-64 mb-6">
                   <Image 
                     src={iPhoneImages[model.name] || '/placeholder.svg'} 
                     alt={model.name}
@@ -434,9 +434,9 @@ export default function ProductsPage() {
                 </div>
                 
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Color</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Color</label>
                   <select 
-                    className="w-full border rounded-md py-2 px-3"
+                    className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                     onChange={(e) => handleColorChange(model.name, e.target.value)}
                     value={selectedColors[model.name] || model.colors[0]}
                   >
@@ -446,10 +446,10 @@ export default function ProductsPage() {
                   </select>
                 </div>
 
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Storage</label>
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Storage</label>
                   <select 
-                    className="w-full border rounded-md py-2 px-3"
+                    className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                     onChange={(e) => handleStorageChange(model.name, e.target.value)}
                     value={selectedStorage[model.name] || model.storage[0]}
                   >
@@ -461,7 +461,7 @@ export default function ProductsPage() {
 
                 <button
                   onClick={() => handleAddToCart(model, 'iPhone')}
-                  className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mb-2"
+                  className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 mb-4 shadow-sm hover:shadow-md"
                 >
                   Express Interest
                 </button>
@@ -470,9 +470,9 @@ export default function ProductsPage() {
                   href="https://www.apple.com/sg/shop/buy-iphone"
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center text-blue-600 hover:text-blue-800 transition duration-300"
+                  className="flex items-center justify-center text-blue-600 hover:text-blue-700 font-medium transition duration-200"
                 >
-                  <ExternalLink className="w-4 h-4 mr-1" />
+                  <ExternalLink className="w-4 h-4 mr-2" />
                   View on Apple Store
                 </a>
               </div>
@@ -480,13 +480,13 @@ export default function ProductsPage() {
           </div>
         </section>
 
-        <section id="airpods" className="mt-12">
-          <h2 className="text-2xl font-bold mb-4">AirPods</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section id="airpods" className="mb-16">
+          <h2 className="text-3xl font-bold mb-8 text-gray-900">AirPods</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {airPodsModels.map((model) => (
-              <div key={model.name} className="border rounded-lg p-4 shadow-sm flex flex-col h-full">
-                <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
-                <div className="relative h-64 mb-4">
+              <div key={model.name} className="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-6 flex flex-col h-full">
+                <h3 className="text-xl font-bold mb-4 text-gray-900">{model.name}</h3>
+                <div className="relative h-64 mb-6">
                   <Image 
                     src={airPodsImages[model.name] || '/placeholder.svg'} 
                     alt={model.name}
@@ -497,23 +497,23 @@ export default function ProductsPage() {
                   />
                 </div>
                 
-                <div className="flex-grow">
+                <div className="flex-grow space-y-4">
                   {model.options.map((option) => (
-                    <div key={option.label} className="mb-4">
+                    <div key={option.label}>
                       {option.type === 'checkbox' ? (
-                        <label className="flex items-center">
+                        <label className="flex items-center space-x-3">
                           <input 
                             type="checkbox" 
-                            className="form-checkbox h-5 w-5 text-blue-600"
+                            className="form-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                             onChange={(e) => handleOptionChange(model.name, option.label, e.target.checked)}
                           />
-                          <span className="ml-2 text-sm text-gray-700">{option.label}</span>
+                          <span className="text-sm font-medium text-gray-700">{option.label}</span>
                         </label>
                       ) : option.type === 'select' ? (
                         <>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">{option.label}</label>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">{option.label}</label>
                           <select 
-                            className="w-full border rounded-md py-2 px-3"
+                            className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                             onChange={(e) => handleOptionChange(model.name, option.label, e.target.value)}
                             defaultValue={option.choices?.[0]}
                           >
@@ -527,10 +527,10 @@ export default function ProductsPage() {
                   ))}
                 </div>
 
-                <div className="mt-auto">
+                <div className="mt-6">
                   <button
                     onClick={() => handleAddToCart(model, 'AirPods')}
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mb-2"
+                    className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 mb-4 shadow-sm hover:shadow-md"
                   >
                     Express Interest
                   </button>
@@ -539,9 +539,9 @@ export default function ProductsPage() {
                     href="https://www.apple.com/sg/airpods/compare/"
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center text-blue-600 hover:text-blue-800 transition duration-300"
+                    className="flex items-center justify-center text-blue-600 hover:text-blue-700 font-medium transition duration-200"
                   >
-                    <ExternalLink className="w-4 h-4 mr-1" />
+                    <ExternalLink className="w-4 h-4 mr-2" />
                     Compare on Apple Store
                   </a>
                 </div>
@@ -550,13 +550,13 @@ export default function ProductsPage() {
           </div>
         </section>
 
-        <section id="ipad" className="mt-12">
-          <h2 className="text-2xl font-bold mb-4">iPad</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section id="ipad" className="mb-16">
+          <h2 className="text-3xl font-bold mb-8 text-gray-900">iPad</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {iPadModels.map((model) => (
-              <div key={model.name} className="border rounded-lg p-4 shadow-sm flex flex-col h-full">
-                <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
-                <div className="relative h-64 mb-4">
+              <div key={model.name} className="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-6 flex flex-col h-full">
+                <h3 className="text-xl font-bold mb-4 text-gray-900">{model.name}</h3>
+                <div className="relative h-64 mb-6">
                   <Image 
                     src={iPadImages[model.name] || '/placeholder.svg'} 
                     alt={model.name}
@@ -567,23 +567,23 @@ export default function ProductsPage() {
                   />
                 </div>
                 
-                <div className="flex-grow">
+                <div className="flex-grow space-y-4">
                   {model.options.map((option) => (
-                    <div key={option.label} className="mb-4">
+                    <div key={option.label}>
                       {option.type === 'checkbox' ? (
-                        <label className="flex items-center">
+                        <label className="flex items-center space-x-3">
                           <input 
                             type="checkbox" 
-                            className="form-checkbox h-5 w-5 text-blue-600"
+                            className="form-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                             onChange={(e) => handleOptionChange(model.name, option.label, e.target.checked)}
                           />
-                          <span className="ml-2 text-sm text-gray-700">{option.label}</span>
+                          <span className="text-sm font-medium text-gray-700">{option.label}</span>
                         </label>
                       ) : option.type === 'select' ? (
                         <>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">{option.label}</label>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">{option.label}</label>
                           <select 
-                            className="w-full border rounded-md py-2 px-3"
+                            className="w-full border border-gray-300 rounded-lg py-2.5 px-3 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                             onChange={(e) => handleOptionChange(model.name, option.label, e.target.value)}
                             defaultValue={option.choices?.[0]}
                           >
@@ -597,10 +597,10 @@ export default function ProductsPage() {
                   ))}
                 </div>
 
-                <div className="mt-auto">
+                <div className="mt-6">
                   <button
                     onClick={() => handleAddToCart(model, 'iPad')}
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mb-2"
+                    className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 mb-4 shadow-sm hover:shadow-md"
                   >
                     Express Interest
                   </button>
@@ -609,9 +609,9 @@ export default function ProductsPage() {
                     href="https://www.apple.com/sg/ipad/compare/"
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center text-blue-600 hover:text-blue-800 transition duration-300"
+                    className="flex items-center justify-center text-blue-600 hover:text-blue-700 font-medium transition duration-200"
                   >
-                    <ExternalLink className="w-4 h-4 mr-1" />
+                    <ExternalLink className="w-4 h-4 mr-2" />
                     Compare on Apple Store
                   </a>
                 </div>
@@ -620,14 +620,14 @@ export default function ProductsPage() {
           </div>
         </section>
 
-        <section id="mac" className="mt-12">
-          <h2 className="text-2xl font-bold mb-4">Mac</h2>
-          <p className="text-gray-600">Mac listings coming soon...</p>
+        <section id="mac" className="mb-16">
+          <h2 className="text-3xl font-bold mb-4 text-gray-900">Mac</h2>
+          <p className="text-lg text-gray-700">Mac listings coming soon...</p>
         </section>
 
-        <section id="watch" className="mt-12">
-          <h2 className="text-2xl font-bold mb-4">Watch</h2>
-          <p className="text-gray-600">Watch listings coming soon...</p>
+        <section id="watch" className="mb-16">
+          <h2 className="text-3xl font-bold mb-4 text-gray-900">Watch</h2>
+          <p className="text-lg text-gray-700">Watch listings coming soon...</p>
         </section>
 
         <OrderModal
@@ -636,6 +636,16 @@ export default function ProductsPage() {
           productDetails={selectedProduct || { name: '' }}
         />
       </main>
+
+      <footer className="bg-gray-100 py-10 shadow-inner">
+        <div className="container mx-auto px-4 text-center text-gray-700">
+          <p className="font-medium">&copy; 2024 Apple EPP Helper. All rights reserved.</p>
+          <div className="mt-6 space-x-6">
+            <Link href="/contact" className="text-blue-600 hover:text-blue-700 font-medium hover:underline">Contact Us</Link>
+            <Link href="/faq" className="text-blue-600 hover:text-blue-700 font-medium hover:underline">FAQ</Link>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
