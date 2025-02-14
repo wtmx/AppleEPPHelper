@@ -45,6 +45,7 @@ interface ProductDetails {
   smart_folio?: string
   unique_features?: string
   applecare_opt_in?: boolean
+  active_noise_cancellation?: boolean
 }
 
 const iPhoneModels: IPhoneModel[] = [
@@ -303,10 +304,14 @@ export default function ProductsPage() {
         }
       }
       
+      if (model.name === 'AirPods 4') {
+        productDetails.active_noise_cancellation = selectedOptions[model.name]?.['Active Noise Cancellation'] as boolean || false
+      }
+      
       const features: string[] = []
       model.options.forEach(option => {
         if (option.type === 'checkbox' && selectedOptions[model.name]?.[option.label]) {
-          if (option.label !== 'AppleCare+') {
+          if (option.label !== 'AppleCare+' && option.label !== 'Active Noise Cancellation') {
             features.push(option.label)
           }
         }
@@ -505,6 +510,7 @@ export default function ProductsPage() {
                           <input 
                             type="checkbox" 
                             className="form-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                            checked={selectedOptions[model.name]?.[option.label] as boolean || false}
                             onChange={(e) => handleOptionChange(model.name, option.label, e.target.checked)}
                           />
                           <span className="text-sm font-medium text-gray-700">{option.label}</span>

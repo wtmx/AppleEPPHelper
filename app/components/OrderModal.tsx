@@ -19,6 +19,7 @@ interface OrderModalProps {
     smart_folio?: string
     unique_features?: string
     applecare_opt_in?: boolean
+    active_noise_cancellation?: boolean
   }
 }
 
@@ -30,6 +31,7 @@ export default function OrderModal({ isOpen, onClose, productDetails }: OrderMod
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [appleCare, setAppleCare] = useState(false)
+  const [activeNoiseCancel, setActiveNoiseCancel] = useState(false)
 
   // Reset all form states
   const resetForm = () => {
@@ -39,17 +41,19 @@ export default function OrderModal({ isOpen, onClose, productDetails }: OrderMod
     setIsSubmitting(false)
     setIsSuccess(false)
     setError(null)
+    setActiveNoiseCancel(false)
     // Don't reset AppleCare+ here as we want to keep the passed-in value
   }
 
-  // Reset form and set initial AppleCare+ state when modal is opened with new product
+  // Reset form and set initial states when modal is opened with new product
   useEffect(() => {
     if (isOpen) {
       resetForm()
       // Set AppleCare+ state based on the product details
       setAppleCare(productDetails.applecare_opt_in || false)
+      setActiveNoiseCancel(productDetails.active_noise_cancellation || false)
     }
-  }, [isOpen, productDetails.name, productDetails.applecare_opt_in])
+  }, [isOpen, productDetails.name, productDetails.applecare_opt_in, productDetails.active_noise_cancellation])
 
   const handleClose = () => {
     resetForm()
@@ -63,7 +67,7 @@ export default function OrderModal({ isOpen, onClose, productDetails }: OrderMod
     setError(null)
 
     try {
-      console.log('Submitting product details:', productDetails) // Log product details
+      console.log('Submitting product details:', productDetails)
 
       // First, get or create user
       const { data: user, error: userError } = await supabase
@@ -96,7 +100,7 @@ export default function OrderModal({ isOpen, onClose, productDetails }: OrderMod
         apple_pencil: productDetails.apple_pencil || null,
         keyboard: productDetails.keyboard || null,
         smart_folio: productDetails.smart_folio || null,
-        unique_features: productDetails.unique_features || null,
+        unique_features: productDetails.name === 'AirPods 4' && activeNoiseCancel ? 'Active Noise Cancellation' : productDetails.unique_features || null,
         applecare_opt_in: appleCare || productDetails.applecare_opt_in || false
       }
 
@@ -120,6 +124,7 @@ export default function OrderModal({ isOpen, onClose, productDetails }: OrderMod
       const interestData = {
         user_id: user.id,
         product_id: product.id,
+        name: name,
         color: productDetails.color || null,
         storage: productDetails.storage || null,
         size: productDetails.size || null,
@@ -128,7 +133,7 @@ export default function OrderModal({ isOpen, onClose, productDetails }: OrderMod
         apple_pencil: productDetails.apple_pencil || null,
         keyboard: productDetails.keyboard || null,
         smart_folio: productDetails.smart_folio || null,
-        unique_features: productDetails.unique_features || null,
+        unique_features: productDetails.name === 'AirPods 4' && activeNoiseCancel ? 'Active Noise Cancellation' : productDetails.unique_features || null,
         applecare_opt_in: appleCare || productDetails.applecare_opt_in || false
       }
 
@@ -248,7 +253,18 @@ export default function OrderModal({ isOpen, onClose, productDetails }: OrderMod
               </div>
             </div>
 
-            <div className="mb-6">
+            <div className="space-y-4 mb-6">
+              {productDetails.name === 'AirPods 4' && (
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={activeNoiseCancel}
+                    onChange={(e) => setActiveNoiseCancel(e.target.checked)}
+                    className="form-checkbox h-5 w-5 text-blue-600"
+                  />
+                  <span className="ml-2 text-sm text-gray-700">Active Noise Cancellation</span>
+                </label>
+              )}
               <label className="flex items-center">
                 <input
                   type="checkbox"
